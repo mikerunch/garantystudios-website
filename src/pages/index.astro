@@ -1,0 +1,153 @@
+---
+import BaseHead from '../components/BaseHead.astro';
+import Footer from '../components/Footer.astro';
+import Header from '../components/Header.astro';
+import { SITE_DESCRIPTION, SITE_TITLE } from '../consts';
+---
+
+<!doctype html>
+<html lang="en">
+  <head>
+    <BaseHead title={SITE_TITLE} description={SITE_DESCRIPTION} />
+    <script is:inline>
+      window.copyEmail = function (email, el) {
+        navigator.clipboard.writeText(email);
+        const original = el.innerText;
+        el.innerText = 'Copied ✓';
+        el.classList.add('copied');
+        setTimeout(() => {
+          el.innerText = original;
+          el.classList.remove('copied');
+        }, 1500);
+      };
+    </script>
+  </head>
+  <body>
+    <Header />
+    <main class="home">
+  <section class="hero">
+    <h1 class="title">Garanty Studios</h1>
+    <p class="tagline">We do what we love, and you love what we do.</p>
+  </section>
+
+  <section class="contact">
+    <button class="copy-btn" onclick="window.copyEmail('support@garantystudios.net', this)">support@garantystudios.net</button>
+    <button class="copy-btn" onclick="window.copyEmail('promotion@garantystudios.net', this)">promotion@garantystudios.net</button>
+  </section>
+</main>
+
+<style>
+body {
+  background: #ffffff;
+}
+
+.home {
+  color: #111;
+  padding: 4rem 1.5rem;
+  max-width: 700px;
+  margin: 0 auto;
+  text-align: center;
+}
+
+.home {
+  position: relative;
+  z-index: 1;
+}
+
+body::before {
+  content: '';
+  position: fixed;
+  inset: 0;
+  background-image: linear-gradient(to right, rgba(0,0,0,0.05) 1px, transparent 1px),
+                    linear-gradient(to bottom, rgba(0,0,0,0.05) 1px, transparent 1px);
+  background-size: 40px 40px;
+  z-index: -1;
+  pointer-events: none;
+  animation: gridMove 20s linear infinite;
+}
+
+.hero {
+  margin-top: 20vh;
+}
+
+.title {
+  font-size: 3rem;
+  font-weight: 700;
+  margin-bottom: 1rem;
+  animation: fadeUp 1s ease forwards, fontShift 6s infinite alternate ease-in-out;
+}
+
+.tagline {
+  opacity: 0;
+  font-size: 1.2rem;
+  animation: fadeUp 1s ease forwards;
+  animation-delay: 0.4s;
+}
+
+.contact {
+  margin-top: 6rem;
+  display: flex;
+  flex-direction: column;
+  gap: 1rem;
+  align-items: center;
+}
+
+.copy-btn {
+  padding: 0.7rem 1.4rem;
+  border-radius: 999px;
+  border: 1px solid #111;
+  background: transparent;
+  cursor: pointer;
+  transition: all 0.25s ease;
+}
+
+.copy-btn:hover {
+  background: #111;
+  color: #fff;
+  transform: translateY(-2px);
+}
+
+.copy-btn.copied {
+  background: #111;
+  color: #fff;
+  transform: scale(1.05);
+}
+
+@keyframes fadeUp {
+  from {
+    opacity: 0;
+    transform: translateY(20px);
+  }
+  to {
+    opacity: 1;
+    transform: translateY(0);
+  }
+}
+
+@keyframes fontShift {
+  0% {
+    letter-spacing: 0px;
+    transform: scale(1);
+  }
+  50% {
+    letter-spacing: 2px;
+    transform: scale(1.03);
+  }
+  100% {
+    letter-spacing: 0px;
+    transform: scale(1);
+  }
+}
+
+@keyframes gridMove {
+  from {
+    background-position: 0 0, 0 0;
+  }
+  to {
+    background-position: 40px 40px, 40px 40px;
+  }
+}
+</style>
+		<Footer />
+	</body>
+</html>

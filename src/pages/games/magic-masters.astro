@@ -1,0 +1,23 @@
+---
+import Layout from '../../layouts/GamePage.astro';
+
+const game = {
+	title: 'Magic Masters',
+	description:
+		'Magic Masters is an action-packed adventure where you dive into a world of magic and excitement. You’ll battle fierce enemies using a variety of powerful spells, each more epic than the last. As you progress, youll unlock and upgrade your magic abilities, making your character even stronger. The game features stunning graphics with epic effects that bring every spell and battle to life. Along the way, you can purchase potions to boost your strength and overcome tougher challenges. Each new world you explore is filled with surprises, from hidden secrets to new enemies, ensuring that every adventure is fresh and thrilling.',
+	pubDate: new Date('2024-06-1'),
+	heroImage: '/images/games/mm_banner.png',
+	link: 'https://play.google.com/store/apps/details?id=com.GarantyStudios.MagicMasters',
+    score: 7
+};
+---
+
+<Layout
+	title={game.title}
+	description={game.description}
+	pubDate={game.pubDate}
+	heroImage={game.heroImage}
+	link={game.link}
+    score={game.score}
+>
+</Layout>

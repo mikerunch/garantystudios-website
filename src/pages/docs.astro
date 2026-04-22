@@ -1,0 +1,32 @@
+---
+import BaseHead from '../components/BaseHead.astro';
+import Header from '../components/Header.astro';
+import Footer from '../components/Footer.astro';
+---
+
+<!doctype html>
+<html lang="en">
+  <head>
+    <BaseHead title="Docs" description="Documentation" />
+  </head>
+
+  <body>
+    <Header />
+
+    <main class="docs-home">
+      <h1>Docs</h1>
+
+      <a href="/docs/tos">Start → ToS</a>
+    </main>
+
+    <Footer />
+  </body>
+</html>
+
+<style>
+.docs-home {
+  max-width: 700px;
+  margin: 6rem auto;
+  padding: 2rem;
+}
+</style>

@@ -1,0 +1,23 @@
+---
+import Layout from '../../layouts/GamePage.astro';
+
+const game = {
+	title: 'A NOT Troll Game',
+	description:
+		'You play as Coob, tasked with saving the fated Cooblandia from the dark forces of Zoobtryx. Your journey stretches across the land, but the world is no ally. Invisible walls, blocks that appear out of nowhere – the trolling knows no end. And even if you manage to conquer all the levels and defeat Zoobtryx, another unexpected “friend” might still await. A jump-and-run in pixel-low style, where nothing can be trusted. The world is not what it seems. Ten levels that hide more than they reveal.',
+	pubDate: new Date('2022-07-13'),
+	heroImage: '/images/games/antg_banner.png',
+	link: 'https://store.steampowered.com/app/2487640/A_NOT_Troll_Game/',
+    score: 7
+};
+---
+
+<Layout
+	title={game.title}
+	description={game.description}
+	pubDate={game.pubDate}
+	heroImage={game.heroImage}
+	link={game.link}
+    score={game.score}
+>
+</Layout>
