@@ -6,17 +6,17 @@ const base = import.meta.env.BASE_URL;
 <header class="navbar">
   <!-- LEFT: Logo -->
   <div class="left">
-    <a class="logo" href="">
+    <a class="logo" href={`${base}`}>
       <img src={`${base}/images/full_logo.png`} alt="Logo" />
     </a>
   </div>
 
   <!-- CENTER: Pages -->
   <nav class="center">
-    <HeaderLink href="games">Games</HeaderLink>
-    <HeaderLink href="about">About</HeaderLink>
-    <!-- <HeaderLink href="news">News</HeaderLink> -->
-    <HeaderLink href="docs/tos">Docs</HeaderLink>
+    <HeaderLink href={`${base}/games`}>Games</HeaderLink>
+    <HeaderLink href={`${base}/about`}>About</HeaderLink>
+    <!-- <HeaderLink href={`${base}/news`}>News</HeaderLink> -->
+    <HeaderLink href={`${base}/docs/tos`}>Docs</HeaderLink>
   </nav>
 
   <!-- RIGHT: Actions -->
