@@ -1,20 +1,21 @@
 ---
 const today = new Date();
+const base = import.meta.env.BASE_URL;
 ---
 
 <footer>
 	&copy; {today.getFullYear()} Garanty Studios. All rights reserved.
 	<div class="social-links">
 		<a href="https://youtube.com/@garantystudios" target="_blank">
-			<img src="/icons/yt.svg" alt="YouTube" width="32" height="32" />
+			<img src={`${base}/icons/yt.svg`} alt="YouTube" width="32" height="32" />
 		</a>
 		<a href="https://x.com/GarantyStudios" target="_blank">
 			<span class="sr-only">Follow Garanty Studios on Twitter</span>
-			<img src="/icons/x.svg" alt="X (formerly Twitter)" width="32" height="32" />
+			<img src={`${base}/icons/x.svg`} alt="X (formerly Twitter)" width="32" height="32" />
 		</a>
 		<a href="https://discord.gg/37HGpjm3kx" target="_blank">
 			<span class="sr-only">Join our Discord server</span>
-			<img src="/icons/dc.svg" alt="Discord" width="32" height="32" />
+			<img src={`${base}/icons/dc.svg`} alt="Discord" width="32" height="32" />
 		</a>
 	</div>
 </footer>
