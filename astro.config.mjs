@@ -6,7 +6,8 @@ import { defineConfig, fontProviders } from 'astro/config';
 
 // https://astro.build/config
 export default defineConfig({
-	site: 'https://github.com/mikerunch/garantystudios-website.git',
+	site: 'https://mikerunch.github.io',
+	base: '/garantystudios-website',
 	integrations: [mdx(), sitemap()],
 	fonts: [
 		{
