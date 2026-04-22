@@ -118,7 +118,7 @@ const base = import.meta.env.BASE_URL;
 					<div class="grid">
 						{sortedGames.map(game => (
 							<a href={base + game.link} class="card">
-								<img src={game.image} alt={game.name} />
+								<img src={base + game.image} alt={game.name} />
 								<div class="title-card">{game.name}</div>
 							</a>
 						))}
