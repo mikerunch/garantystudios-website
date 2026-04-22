@@ -25,6 +25,8 @@ const games = [
 
 // Sort by weight (desc)
 const sortedGames = games.sort((a, b) => b.weight - a.weight);
+
+const base = import.meta.env.BASE_URL;
 ---
 
 <html lang="en">
@@ -115,7 +117,7 @@ const sortedGames = games.sort((a, b) => b.weight - a.weight);
 
 					<div class="grid">
 						{sortedGames.map(game => (
-							<a href={game.link} class="card">
+							<a href={base + game.link} class="card">
 								<img src={game.image} alt={game.name} />
 								<div class="title-card">{game.name}</div>
 							</a>
