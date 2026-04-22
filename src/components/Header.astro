@@ -1,5 +1,6 @@
 ---
 import HeaderLink from "./HeaderLink.astro";
+const base = import.meta.env.BASE_URL;
 ---
 
 <header class="navbar">
@@ -21,13 +22,13 @@ import HeaderLink from "./HeaderLink.astro";
   <!-- RIGHT: Actions -->
   <div class="right">
     <a href="https://youtube.com/@garantystudios" target="_blank" aria-label="YouTube">
-      <img src="/icons/yt.svg" alt="YouTube" />
+      <img src={`${base}/icons/yt.svg`} alt="YouTube" />
     </a>
     <a href="https://x.com/GarantyStudios" target="_blank" aria-label="X">
-      <img src="/icons/x.svg" alt="X" />
+      <img src={`${base}/icons/x.svg`} alt="X" />
     </a>
       <a href="https://discord.gg/37HGpjm3kx" target="_blank" aria-label="Discord">
-      <img src="/icons/dc.svg" alt="Discord" />
+      <img src={`${base}/icons/dc.svg`} alt="Discord" />
     </a>
   </div>
 </header>
