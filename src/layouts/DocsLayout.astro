@@ -42,7 +42,7 @@ const base = import.meta.env.BASE_URL;
         <nav class="nav">
           {docs.map((doc) => (
             <a
-              href={`${base}${doc.url}`}
+              href={`${doc.url}`}
               class={normalize(doc.url) === normalize(currentPath) ? 'active' : ''}
             >
               {doc.title}
