@@ -87,6 +87,27 @@ body::before {
   padding: 0 1rem;
 }
 
+.hero-button {
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  margin-top: 1.5rem;
+  padding: 0.85rem 1.8rem;
+  border-radius: 999px;
+  background: #111;
+  color: #fff;
+  text-decoration: none;
+  font-weight: 600;
+  transition: transform 0.25s ease, box-shadow 0.25s ease, background 0.25s ease;
+  box-shadow: 0 15px 30px rgba(0, 0, 0, 0.08);
+}
+
+.hero-button:hover {
+  transform: translateY(-2px);
+  box-shadow: 0 20px 40px rgba(0, 0, 0, 0.12);
+  background: #222;
+}
+
 .title {
   font-size: 3rem;
   font-weight: 700;
