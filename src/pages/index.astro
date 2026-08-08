@@ -3,6 +3,7 @@ import BaseHead from '../components/BaseHead.astro';
 import Footer from '../components/Footer.astro';
 import Header from '../components/Header.astro';
 import { SITE_DESCRIPTION, SITE_TITLE } from '../consts';
+const base = import.meta.env.BASE_URL;
 ---
 
 <!doctype html>
@@ -26,8 +27,7 @@ import { SITE_DESCRIPTION, SITE_TITLE } from '../consts';
     <Header />
     <main class="home">
   <section class="hero">
-    <h1 class="title">Garanty Studios</h1>
-    <p class="tagline">We do what we love, and you love what we do.</p>
+    <img src={`${base}/images/vertical_logo.png`} alt="Logo" class="hero-logo" />
   </section>
 
   <section class="contact">
