@@ -21,13 +21,28 @@ const base = import.meta.env.BASE_URL;
           el.classList.remove('copied');
         }, 1500);
       };
+
+      window.openLink = function (url) {
+        window.open(url, '_blank', 'noopener,noreferrer');
+      };
     </script>
   </head>
   <body>
     <Header />
     <main class="home">
   <section class="hero">
-    <img src="/images/vertical_logo.png" alt="Logo" class="hero-logo" />
+    <img src={`${base}images/vertical_logo.png`} alt="Logo" class="hero-logo" />
+
+    <div class="icon-row">
+      <button class="icon-btn" aria-label="Steam" title="Steam" onclick="window.openLink('https://store.steampowered.com/')">
+        <img src="/icons/steam.svg" alt="Steam" width="20" height="20" />
+      </button>
+
+      <button class="icon-btn" aria-label="Itch.io" title="Itch.io" onclick="window.openLink('https://itch.io/')">
+        <img src="/icons/itch.svg" alt="Itch.io" width="20" height="20" />
+      </button>
+    </div>
+
     <!--<p>Support Myk, the developer!</p>-->
     <a href="https://linktr.ee/myk_gs" class="hero-button">Follow Myk</a>
   </section>
