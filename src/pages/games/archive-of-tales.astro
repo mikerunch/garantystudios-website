@@ -1,0 +1,24 @@
+---
+import Layout from '../../layouts/GamePage.astro';
+
+const game = {
+	title: 'Archive of Tales',
+	description:
+		'Archive of Tales is a collection of standalone horror story experiences, each with its own unique atmosphere, gameplay, and ideas. Instead of everything being part of one large game, each experience can stand on its own and tell something different. The goal is to give smaller horror experiences a place where they can exist as their own stories, allowing players to explore a variety of chilling narratives and immersive worlds.',
+	pubDate: new Date('2025-01-01'),
+	heroImage: '/images/games/aot_banner.png',
+	link: 'https://garantystudios.itch.io',
+    score: 6
+};
+---
+
+<Layout
+	title={game.title}
+	description={game.description}
+	pubDate={game.pubDate}
+	heroImage={game.heroImage}
+	link={game.link}
+    score={game.score}
+	<p>All AoT Games are marked as part of the collection. You can find them on our itch.io page.</p>
+>
+</Layout>
