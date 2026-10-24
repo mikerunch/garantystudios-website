@@ -54,6 +54,18 @@ All commands are run from the root of the project, from a terminal:
 | `npm run astro ...`       | Run CLI commands like `astro add`, `astro check` |
 | `npm run astro -- --help` | Get help using the Astro CLI                     |
 
+## Shared styling
+
+Global design tokens, button styles, and motion rules live in [`src/styles/global.css`](./src/styles/global.css). Use `.button` with a variant:
+
+```html
+<a class="button button--primary" href="/games">Explore games</a>
+<button class="button button--outline" type="button">Contact us</button>
+<button class="button button--icon" type="button" aria-label="Open link">...</button>
+```
+
+Available variants are `button--primary`, `button--secondary`, `button--outline`, and `button--icon`. Standard buttons share dimensions and gain an accent border on hover or keyboard focus; icon buttons and other links do not use that treatment. Adjust `--motion-fast`, `--motion-standard`, `--motion-slow`, or `--motion-ease` in `:root` to tune transitions site-wide. `.animate-fade-in` provides the shared opacity-only entrance animation. Reduced-motion preferences are handled globally.
+
 ## 👀 Want to learn more?
 
 Check out [our documentation](https://docs.astro.build) or jump into our [Discord server](https://astro.build/chat).

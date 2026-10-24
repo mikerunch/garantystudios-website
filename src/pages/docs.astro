@@ -10,13 +10,19 @@ import Footer from '../components/Footer.astro';
     <BaseHead title="Docs" description="Documentation" />
   </head>
 
-  <body>
+  <body class="docs-home-page">
     <Header />
 
     <main class="docs-home">
       <h1>Docs</h1>
-
-      <a href="/docs/tos">Start → ToS</a>
+      <p>Under Documents we store all relevant and legal information about our services. That is the place if you look for the terms of service or the EULA.</p>
+      <a class="button button--primary" href="/docs/tos" style="margin-bottom: 60px;">Open Docs</a>
+      
+      <p class="placeholder-text">This page is too short so the footer breaks, so I hope you don't mind me adding some useless text</p>
+      <p class="placeholder-text">uzweuzquiweuiztrewuoiwioqzoieuoioqwpopurewiozoiwq</p>
+      <p class="placeholder-text">alkshdhljdkfgljadljgjladsjhhjlfjgsajgasdhkdjhasll</p>
+      <p class="placeholder-text">mnxcvmnbnmbxymbvcmvmnyxcbyxcnmvyxcmnyxcmnvyxcmnvn</p>
+  
     </main>
 
     <Footer />
@@ -26,7 +32,24 @@ import Footer from '../components/Footer.astro';
 <style>
 .docs-home {
   max-width: 700px;
+  flex: 1 0 auto;
+  width: 100%;
   margin: 6rem auto;
   padding: 2rem;
+}
+
+.placeholder-text {
+  color: #888;
+  opacity: 0.5;
+}
+
+:global(body.docs-home-page) {
+  display: flex;
+  min-height: 100vh;
+  flex-direction: column;
+}
+
+:global(body.docs-home-page footer) {
+  margin-top: auto;
 }
 </style>
