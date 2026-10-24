@@ -8,7 +8,76 @@ import { SITE_TITLE } from '../consts';
 <!doctype html>
 <html lang="en">
   <head>
-    <BaseHead title={`Contact | ${SITE_TITLE}`} description="Contact Garanty Studios for support, questions, and other inquiries." />
+    <BaseHead title={`Contact`} description="Contact Garanty Studios for support, questions, and other inquiries." />
+    <script
+      is:inline
+      src="https://static.zohocdn.com/zohodeskstatic/app/js/jqueryandencoder.ef05974972bf3bca1b87.js"
+    ></script>
+    <script is:inline>
+      function zsShowCaptcha() {
+        jQuery('#zsCaptchaLoading').hide();
+        jQuery('#zsCaptcha').show();
+      }
+
+      function zsRegenerateCaptcha() {
+        const request = new XMLHttpRequest();
+        request.open(
+          'GET',
+          'https://desk.zoho.eu/support/GenerateCaptcha?action=getNewCaptcha&_=' + Date.now(),
+          true,
+        );
+        request.onreadystatechange = function () {
+          if (request.readyState !== 4) return;
+
+          if (request.status !== 200) {
+            const error = document.getElementById('captcha-error');
+            if (error) {
+              error.textContent = 'Could not load the captcha. Please try refreshing it.';
+              error.hidden = false;
+            }
+            return;
+          }
+
+          try {
+            const response = JSON.parse(request.responseText);
+            if (typeof response.captchaUrl !== 'string' || typeof response.captchaDigest !== 'string') {
+              throw new Error('Captcha response was invalid.');
+            }
+
+            const image = document.getElementById('zsCaptchaUrl');
+            const digest = document.getElementsByName('xJdfEaS')[0];
+            const error = document.getElementById('captcha-error');
+            if (!(image instanceof HTMLImageElement) || !(digest instanceof HTMLInputElement)) {
+              throw new Error('Captcha form fields were not found.');
+            }
+
+            jQuery('#zsCaptchaUrl').load(zsShowCaptcha);
+            image.src = response.captchaUrl;
+            digest.value = response.captchaDigest;
+            if (error) error.hidden = true;
+          } catch (error) {
+            const message = document.getElementById('captcha-error');
+            if (message) {
+              message.textContent = 'Could not load the captcha. Please try refreshing it.';
+              message.hidden = false;
+            }
+            console.error('Unable to load contact form captcha.', error);
+          }
+        };
+        request.onerror = function () {
+          const error = document.getElementById('captcha-error');
+          if (error) {
+            error.textContent = 'Could not load the captcha. Please try refreshing it.';
+            error.hidden = false;
+          }
+        };
+        request.send();
+      }
+
+      document.addEventListener('readystatechange', function () {
+        if (document.readyState === 'complete') zsRegenerateCaptcha();
+      });
+    </script>
   </head>
   <body>
     <Header />
@@ -75,9 +144,11 @@ import { SITE_TITLE } from '../consts';
         <div class="form-field captcha-field">
           <label for="captcha-answer">Captcha <span aria-hidden="true">*</span></label>
           <div class="captcha-challenge">
-            <span id="captcha-loading" role="status">Loading captcha…</span>
-            <img id="captcha-image" alt="Captcha challenge" hidden />
-            <button id="captcha-refresh" class="button button--secondary" type="button">Refresh</button>
+            <div id="zsCaptchaLoading" role="status"><strong>Loading captcha…</strong></div>
+            <div id="zsCaptcha" class="captcha-image" style="display: none;">
+              <img id="zsCaptchaUrl" name="zsCaptchaImage" alt="Captcha challenge" />
+              <button id="captcha-refresh" class="button button--secondary" type="button" onclick="zsRegenerateCaptcha()">Refresh</button>
+            </div>
           </div>
           <input
             id="captcha-answer"
@@ -102,64 +173,21 @@ import { SITE_TITLE } from '../consts';
     <script>
       const form = document.querySelector<HTMLFormElement>('#zsWebToCase_244967000000389006');
       const submitButton = document.querySelector<HTMLButtonElement>('#zsSubmitButton_244967000000389006');
-      const captchaImage = document.querySelector<HTMLImageElement>('#captcha-image');
-      const captchaLoading = document.querySelector<HTMLElement>('#captcha-loading');
       const captchaError = document.querySelector<HTMLElement>('#captcha-error');
       const captchaRefresh = document.querySelector<HTMLButtonElement>('#captcha-refresh');
       const captchaAnswer = document.querySelector<HTMLInputElement>('#captcha-answer');
-      const captchaDigest = form?.elements.namedItem('xJdfEaS');
 
-      if (!form || !submitButton || !captchaImage || !captchaLoading || !captchaError || !captchaRefresh || !captchaAnswer || !(captchaDigest instanceof HTMLInputElement)) {
+      if (!form || !submitButton || !captchaError || !captchaRefresh || !captchaAnswer) {
         throw new Error('Could not initialize the contact form.');
       }
 
-      async function refreshCaptcha() {
-        captchaError.hidden = true;
-        captchaLoading.hidden = false;
-        captchaLoading.textContent = 'Loading captcha…';
-        captchaImage.hidden = true;
-        captchaRefresh.disabled = true;
-
-        try {
-          const response = await fetch(
-            `https://desk.zoho.eu/support/GenerateCaptcha?action=getNewCaptcha&_${Date.now()}`,
-          );
-          if (!response.ok) {
-            throw new Error(`Captcha request failed with status ${response.status}.`);
-          }
-
-          const result: unknown = await response.json();
-          if (
-            typeof result !== 'object'
-            || result === null
-            || !('captchaUrl' in result)
-            || typeof result.captchaUrl !== 'string'
-            || !('captchaDigest' in result)
-            || typeof result.captchaDigest !== 'string'
-          ) {
-            throw new Error('Captcha response was invalid.');
-          }
-
-          captchaImage.src = result.captchaUrl;
-          captchaDigest.value = result.captchaDigest;
-          captchaImage.hidden = false;
-          captchaLoading.hidden = true;
-          captchaAnswer.value = '';
-        } catch (error) {
-          captchaLoading.hidden = true;
-          captchaError.textContent = 'Could not load the captcha. Please try refreshing it.';
-          captchaError.hidden = false;
-          console.error('Unable to load contact form captcha.', error);
-        } finally {
-          captchaRefresh.disabled = false;
-        }
-      }
-
-      captchaRefresh.addEventListener('click', refreshCaptcha);
       window.addEventListener('pageshow', () => {
         submitButton.disabled = false;
-        captchaAnswer.value = '';
-        void refreshCaptcha();
+        if (captchaAnswer.value) {
+          captchaAnswer.value = '';
+          captchaAnswer.focus();
+          captchaRefresh.click();
+        }
       });
 
       form.addEventListener('submit', (event) => {
@@ -174,11 +202,9 @@ import { SITE_TITLE } from '../consts';
       form.addEventListener('reset', () => {
         submitButton.disabled = false;
         window.setTimeout(() => {
-          void refreshCaptcha();
+          captchaRefresh.click();
         });
       });
-
-      void refreshCaptcha();
     </script>
   </body>
 </html>
@@ -256,6 +282,12 @@ import { SITE_TITLE } from '../consts';
     min-height: 3rem;
     align-items: center;
     flex-wrap: wrap;
+    gap: 1rem;
+  }
+
+  .captcha-image {
+    display: flex;
+    align-items: center;
     gap: 1rem;
   }
 
